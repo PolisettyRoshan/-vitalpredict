@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VitalPredict | Diabetes Risk Prediction</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<header class="topbar">
+    <div>
+        <div class="brand">VitalPredict</div>
+        <div class="subtitle">AI-powered diabetes risk screening dashboard</div>
+    </div>
+    <span class="status"><span class="dot"></span> Backend Connected</span>
+</header>
+
+<main class="container">
+    <section class="hero">
+        <div>
+            <p class="eyebrow">RANDOM FOREST • MACHINE LEARNING</p>
+            <h1>Diabetes Risk Prediction</h1>
+            <p>Enter the health parameters below to run the trained Random Forest model.</p>
+        </div>
+        <div class="hero-badge">RF<br><small>300 trees</small></div>
+    </section>
+
+    <section class="grid">
+        <div class="card">
+            <h2>Patient Information</h2>
+            <p class="muted">Enter values in the fields. All values are used by the ML model.</p>
+
+            <form id="predictionForm">
+                <div class="form-grid">
+                    <label>Pregnancies
+                        <input type="number" id="pregnancies" min="0" max="20" value="2" required>
+                    </label>
+
+                    <label>Age
+                        <input type="number" id="age" min="1" max="120" value="35" required>
+                    </label>
+
+                    <label>Glucose (mg/dL)
+                        <input type="number" id="glucose" min="1" max="300" value="120" required>
+                    </label>
+
+                    <label>Blood Pressure (mmHg)
+                        <input type="number" id="blood_pressure" min="1" max="200" value="70" required>
+                    </label>
+
+                    <label>Skin Thickness (mm)
+                        <input type="number" id="skin_thickness" min="0" max="100" value="20" required>
+                    </label>
+
+                    <label>Insulin (µU/mL)
+                        <input type="number" id="insulin" min="0" max="900" value="80" required>
+                    </label>
+
+                    <label>BMI
+                        <input type="number" id="bmi" min="1" max="80" step="0.1" value="25.0" required>
+                    </label>
+
+                    <label>Diabetes Pedigree Function
+                        <input type="number" id="pedigree" min="0" max="3" step="0.001" value="0.35" required>
+                    </label>
+                </div>
+
+                <button type="submit" id="predictBtn">Predict Diabetes Risk</button>
+            </form>
+            <p class="disclaimer">For academic screening/demo use only. This output is not a medical diagnosis.</p>
+        </div>
+
+        <div class="card result-card">
+            <h2>Prediction Result</h2>
+            <div id="emptyState" class="empty">
+                <div class="empty-icon">✦</div>
+                <p>Your prediction will appear here.</p>
+            </div>
+
+            <div id="result" class="hidden">
+                <div id="riskPill" class="risk-pill">Low Risk</div>
+                <div class="probability"><span id="probability">0</span><small>% estimated model probability</small></div>
+                <div class="meter"><div id="meterBar"></div></div>
+
+                <h3>Top contributing model features</h3>
+                <div id="features"></div>
+
+                <div class="result-time" id="resultTime"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="card history-card">
+        <div class="section-title">
+            <div>
+                <h2>Recent Prediction History</h2>
+                <p class="muted">Stored temporarily while this Flask server is running.</p>
+            </div>
+            <button class="secondary" onclick="loadHistory()">Refresh</button>
+        </div>
+        <div id="history"></div>
+    </section>
+
+    <section class="architecture">
+        <h2>How Random Forest is used</h2>
+        <div class="steps">
+            <div><b>1</b><span>User Input</span><small>8 health features</small></div>
+            <div><b>2</b><span>Preprocessing</span><small>Missing values + scaling</small></div>
+            <div><b>3</b><span>Random Forest</span><small>300 decision trees</small></div>
+            <div><b>4</b><span>Prediction</span><small>Probability + risk band</small></div>
+            <div><b>5</b><span>Dashboard</span><small>Result + features</small></div>
+        </div>
+    </section>
+</main>
+
+<footer>VitalPredict • Academic AI/ML Mini Project</footer>
+<script src="/static/js/app.js"></script>
+</body>
+</html>
